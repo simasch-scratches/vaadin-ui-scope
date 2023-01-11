@@ -9,18 +9,36 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+@UIScope
+@SpringComponent
 @PageTitle("Hello World")
 @Route(value = "hello", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 public class HelloWorldView extends HorizontalLayout {
 
-    private TextField name;
-    private Button sayHello;
+    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldView.class);
+
+    @PostConstruct
+    public void postConstruct() {
+        LOGGER.info("postConstruct");
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        LOGGER.info("preDestroy");
+    }
 
     public HelloWorldView() {
-        name = new TextField("Your name");
-        sayHello = new Button("Say hello");
+        TextField name = new TextField("Your name");
+        Button sayHello = new Button("Say hello");
         sayHello.addClickListener(e -> {
             Notification.show("Hello " + name.getValue());
         });

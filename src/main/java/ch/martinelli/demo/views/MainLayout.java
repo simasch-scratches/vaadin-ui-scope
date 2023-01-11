@@ -4,6 +4,7 @@ package ch.martinelli.demo.views;
 import ch.martinelli.demo.components.appnav.AppNav;
 import ch.martinelli.demo.components.appnav.AppNavItem;
 import ch.martinelli.demo.views.helloworld.HelloWorldView;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Footer;
@@ -13,11 +14,15 @@ import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
 public class MainLayout extends AppLayout {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainLayout.class);
 
     private H2 viewTitle;
 
@@ -25,6 +30,9 @@ public class MainLayout extends AppLayout {
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
+
+
+        UI.getCurrent().addHeartbeatListener(event -> LOGGER.info("Heartbeat {}", event.getHeartbeatTime()));
     }
 
     private void addHeaderContent() {
