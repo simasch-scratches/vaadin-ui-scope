@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.UUID;
 
 @UIScope
 @SpringComponent
@@ -26,14 +27,16 @@ public class HelloWorldView extends HorizontalLayout {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldView.class);
 
+    private UUID uuid = UUID.randomUUID();
+
     @PostConstruct
     public void postConstruct() {
-        LOGGER.info("postConstruct");
+        LOGGER.info("postConstruct {}", uuid);
     }
 
     @PreDestroy
     public void preDestroy() {
-        LOGGER.info("preDestroy");
+        LOGGER.info("preDestroy  {}", uuid);
     }
 
     public HelloWorldView() {

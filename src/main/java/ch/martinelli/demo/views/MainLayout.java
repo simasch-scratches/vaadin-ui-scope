@@ -31,7 +31,6 @@ public class MainLayout extends AppLayout {
         addDrawerContent();
         addHeaderContent();
 
-
         UI.getCurrent().addHeartbeatListener(event -> LOGGER.info("Heartbeat {}", event.getHeartbeatTime()));
     }
 
